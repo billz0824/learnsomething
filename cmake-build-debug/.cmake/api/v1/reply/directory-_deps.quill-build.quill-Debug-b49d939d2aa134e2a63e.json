@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "_deps/quill-build/quill",
+		"source" : "cmake-build-debug/_deps/quill-src/quill"
+	}
+}

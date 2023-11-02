@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/CMakeFiles/quill-populate"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/CMakeFiles/quill-populate.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/CMakeFiles/quill-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-build.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-download.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-install.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-test.rule"
+		},
+		{
+			"file" : "/Users/youranzhu/GitHub/learnsomething/cmake-build-debug/_deps/quill-subbuild/quill-populate-prefix/src/quill-populate-stamp/quill-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"quill-populate"
+		],
+		"name" : "quill-populate"
+	}
+}
