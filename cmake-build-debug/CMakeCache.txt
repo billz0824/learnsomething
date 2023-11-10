@@ -14,6 +14,8 @@
 # EXTERNAL cache entries
 ########################
 
+:UNINITIALIZED=======
+
 //Builds the googlemock subproject
 BUILD_GMOCK:BOOL=ON
 
@@ -605,7 +607,7 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Python
 FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[/usr/local/Frameworks/Python.framework/Versions/3.11/bin/python3.11][cfound components: Interpreter ][v3.11.6()]
 //Details about finding Threads
-FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v======()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //CMAKE_INSTALL_PREFIX during last run
@@ -619,11 +621,8 @@ _Python_EXECUTABLE:INTERNAL=/usr/local/Frameworks/Python.framework/Versions/3.11
 //Python Properties
 _Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;6;64;;cpython-311-darwin;abi3;/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/lib/python3.11;/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/lib/python3.11;/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages;/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages
 _Python_INTERPRETER_SIGNATURE:INTERNAL=363b1a069019e505f119c4c6d76047eb
-<<<<<<< Updated upstream
-=======
 //Interpreter reason failure
 _Python_Interpreter_REASON_FAILURE:INTERNAL=
->>>>>>> Stashed changes
 //NumPy reason failure
 _Python_NumPy_REASON_FAILURE:INTERNAL=
 cmake_package_name:INTERNAL=GTest
