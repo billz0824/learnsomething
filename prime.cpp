@@ -1,33 +1,43 @@
 #include <iostream>
 #include <vector>
 
-bool is_prime(int num, const std::vector<int>& primes) {
-    for (int index = 0; index < primes.size(); ++index) {
+bool is_prime(int num, const std::vector<int>& primes)
+{
+    for (int index = 0; index < primes.size(); ++index)
+    {
         int i = primes[index];
-        if (num % i == 0) {
+        if (num % i == 0)
+        {
             return false;
         }
     }
     return true;
 }
 
-void notDisasterCode() {
+void notDisasterCode()
+{
     std::vector<int> unique_primes;
 
-    for (int i = 2; i < 2500; ++i) {
+    for (int i = 2; i < 2500; ++i)
+    {
         int curr = i;
-        if (is_prime(curr, unique_primes)) {
+        if (is_prime(curr, unique_primes))
+        {
             unique_primes.push_back(curr);
         } else {
-            for (int index = 0; index < unique_primes.size(); ++index) {
+            for (int index = 0; index < unique_primes.size(); ++index)
+            {
                 int j = unique_primes[index];
-                if (curr % j == 0) {
+                if (curr % j == 0)
+                {
                     unique_primes.push_back(j);
-                    while (curr % j == 0) {
+                    while (curr % j == 0)
+                    {
                         curr /= j;
                     }
                 }
-                if (curr == 1) {
+                if (curr == 1)
+                {
                     break;
                 }
             }
@@ -35,9 +45,11 @@ void notDisasterCode() {
     }
 }
 
-int main() {
+int main()
+{
     double time = 0;
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i)
+    {
         auto start = std::chrono::high_resolution_clock::now();
         notDisasterCode();
         auto end = std::chrono::high_resolution_clock::now();
