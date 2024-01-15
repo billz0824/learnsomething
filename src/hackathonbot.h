@@ -14,9 +14,16 @@ public:
     void takeAction(float price);
     double getBalance();
     bool isHolding();
+    void sell(float price);
+    void buy(float price);
 private:
     double balance;
     bool holding;
+    int downStreak;
+    int upStreak;
+    int constantStreak;
+    float purchasePrice;
+    std::vector<float> prices;
 };
 
 #endif //LEARNSOMETHING_HACKATHONBOT_H
