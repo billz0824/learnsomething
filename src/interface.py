@@ -2,7 +2,6 @@ from sortedcontainers import SortedList
 
 
 class Exchange:
-    # implement this!
 
     def __init__(self, initial_balance, initial_shares):
         """Initial Balance is the amount that each account should start with."""
@@ -20,7 +19,8 @@ class Exchange:
         # add new account
         if trade.account not in self.accounts:
             self.accounts[trade.account] = [self.initial_balance, self.initial_shares]
-            # verify trade validity
+
+        # verify trade validity
         if trade.side != "BUY" and trade.side != "SELL":
             raise ValueError('Invalid trade.')
         if trade.volume <= 0 or trade.price < 0:
@@ -37,78 +37,86 @@ class Exchange:
         # deal with orders to buy
         if trade.side == "BUY":
             remain = trade.volume
-            threshold = trade.price
-            while remain > 0:
-                potential = self.sell.bisect_left(threshold)
-                for tr in range(potential):
-                    curr = self.sell[tr]
-                    curr_p = curr.price
-                    curr_v = curr.volume
-                    if curr_v == remain:
-                        self.sell.remove(curr)
-                        self.accounts[curr.account][0] += curr_v * curr_p
-                        self.accounts[curr.account][1] -= curr_v
-                        self.accounts[trade.account][0] -= curr_v * curr_p
-                        self.accounts[trade.account][1] += curr_v
-                        matches.append(curr)
-                        return matches
-                    elif curr_v > remain:
-                        self.sell[tr].volume -= remain
-                        self.accounts[curr.account][0] += remain * curr_p
-                        self.accounts[curr.account][1] -= remain
-                        self.accounts[trade.account][0] -= remain * curr_p
-                        self.accounts[trade.account][1] += remain
-                        matches.append(curr)
-                        return matches
-                    else:
-                        self.sell.remove(curr)
-                        self.accounts[curr.account][0] += curr_v * curr_p
-                        self.accounts[curr.account][1] -= curr_v
-                        self.accounts[trade.account][0] -= curr_v * curr_p
-                        self.accounts[trade.account][1] += curr_v
-                        matches.append(curr)
-                        remain -= curr.volume
-                trade.volume = remain
+            if len(self.sell) == 0:
                 self.buy.add(trade)
-                break
-            return True
+            else:
+                while remain > 0:
+                    potential = self.sell.bisect_left(trade)
+                    for tr in range(potential+1):
+                        curr = self.sell[tr]
+                        curr_p = curr.price
+                        curr_v = curr.volume
+                        if curr_v == remain:
+                            self.sell.remove(curr)
+                            self.accounts[curr.account][0] += curr_v * curr_p
+                            self.accounts[curr.account][1] -= curr_v
+                            self.accounts[trade.account][0] -= curr_v * curr_p
+                            self.accounts[trade.account][1] += curr_v
+                            matches.append(curr)
+                            return matches
+                        elif curr_v > remain:
+                            curr.volume -= remain
+                            self.accounts[curr.account][0] += remain * curr_p
+                            self.accounts[curr.account][1] -= remain
+                            self.accounts[trade.account][0] -= remain * curr_p
+                            self.accounts[trade.account][1] += remain
+                            matches.append(curr)
+                            return matches
+                        else:
+                            self.sell.remove(curr)
+                            self.accounts[curr.account][0] += curr_v * curr_p
+                            self.accounts[curr.account][1] -= curr_v
+                            self.accounts[trade.account][0] -= curr_v * curr_p
+                            self.accounts[trade.account][1] += curr_v
+                            matches.append(curr)
+                            remain -= curr.volume
+                    if remain > 0:
+                        trade.volume = remain
+                        self.buy.add(trade)
+                        break
+            return
+
         else:
-            remain = trade.volume
-            threshold = trade.price
-            while remain > 0:
-                potential = self.buy.bisect_right(threshold)
-                for tr in range(1, potential+1):
-                    curr = self.sell[-tr]
-                    curr_p = curr.price
-                    curr_v = curr.volume
-                    if curr_v == remain:
-                        self.buy.remove(curr)
-                        self.accounts[curr.account][0] -= curr_v * curr_p
-                        self.accounts[curr.account][1] += curr_v
-                        self.accounts[trade.account][0] += curr_v * curr_p
-                        self.accounts[trade.account][1] -= curr_v
-                        matches.append(curr)
-                        return matches
-                    elif curr_v > remain:
-                        self.buy[tr].volume -= remain
-                        self.accounts[curr.account][0] -= remain * curr_p
-                        self.accounts[curr.account][1] += remain
-                        self.accounts[trade.account][0] += remain * curr_p
-                        self.accounts[trade.account][1] -= remain
-                        matches.append(curr)
-                        return matches
-                    else:
-                        self.buy.remove(curr)
-                        self.accounts[curr.account][0] -= curr_v * curr_p
-                        self.accounts[curr.account][1] += curr_v
-                        self.accounts[trade.account][0] += curr_v * curr_p
-                        self.accounts[trade.account][1] -= curr_v
-                        matches.append(curr)
-                        remain -= curr.volume
-                trade.volume = remain
+            if len(self.buy) == 0:
                 self.sell.add(trade)
-                break
+            else:
+                remain = trade.volume
+                while remain > 0:
+                    potential = self.buy.bisect_right(trade)
+                    for tr in range(len(self.buy) - 1, len(self.buy) - potential - 1, -1):
+                        curr = self.buy[tr]
+                        curr_p = curr.price
+                        curr_v = curr.volume
+                        if curr_v == remain:
+                            self.buy.remove(curr)
+                            self.accounts[curr.account][0] -= curr_v * curr_p
+                            self.accounts[curr.account][1] += curr_v
+                            self.accounts[trade.account][0] += curr_v * curr_p
+                            self.accounts[trade.account][1] -= curr_v
+                            matches.append(curr)
+                            return matches
+                        elif curr_v > remain:
+                            curr.volume -= remain
+                            self.accounts[curr.account][0] -= remain * curr_p
+                            self.accounts[curr.account][1] += remain
+                            self.accounts[trade.account][0] += remain * curr_p
+                            self.accounts[trade.account][1] -= remain
+                            matches.append(curr)
+                            return matches
+                        else:
+                            self.accounts[curr.account][0] -= curr_v * curr_p
+                            self.accounts[curr.account][1] += curr_v
+                            self.accounts[trade.account][0] += curr_v * curr_p
+                            self.accounts[trade.account][1] -= curr_v
+                            matches.append(curr)
+                            remain -= curr.volume
+                            self.buy.remove(curr)
+                    if remain > 0:
+                        trade.volume = remain
+                        self.sell.add(trade)
+                        break
             return True
+
 
 
 class Trade(object):
@@ -127,4 +135,10 @@ class Trade(object):
 
     def __repr__(self):
         return (f"Name: {self.account}, Side: {self.side}, "
-                "Volume: {self.volume}, Price: {self.price}")
+                f"Volume: {self.volume}, Price: {self.price}")
+
+    def __eq__(self, other):
+        return (self.account == other.account
+                and self.side == other.side
+                and self.volume == other.volume
+                and self.price == other.price)
